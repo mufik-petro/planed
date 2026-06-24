@@ -14,9 +14,9 @@ if ($input["userId"] == NULL) {
     $result["state"] = false;
     $result["error"]["message"][] = "'userId' is missing";
 }
-if ($input["trigger"] == NULL) {
+if ($input["trigger"] == NULL && $input["message"] == NULL) {
     $result["state"] = false;
-    $result["error"]["message"][] = "'trigger' is missing";
+    $result["error"]["message"][] = "'trigger' or 'message' is missing";
 }
 if ($input["timezone"] != NULL) {
     $setTimeZone = date_default_timezone_set($input["timezone"]);
@@ -71,7 +71,7 @@ if ($result["state"] === false) {
     exit;
 }
 
-$sql = "INSERT INTO `".$table."` (`time`, `userId`, `trigger`, `token`) VALUES ('".$time."', '".$input["userId"]."', '".$input["trigger"]."', '".$input["token"]."')";
+$sql = "INSERT INTO `".$table."` (`time`, `userId`, `trigger`, `message`, `token`) VALUES ('".$time."', '".$input["userId"]."', '".$input["trigger"]."', '".mysqli_real_escape_string($sqlConnect, $input["message"])."', '".$input["token"]."')";
 $insert = mysqli_query($sqlConnect, $sql);
 if ($insert == false) {
     $result["state"] = false;
