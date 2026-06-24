@@ -32,6 +32,7 @@ CREATE TABLE `planed` (
   `time` int(11) NOT NULL,
   `userId` int(11) NOT NULL,
   `trigger` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `message` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
